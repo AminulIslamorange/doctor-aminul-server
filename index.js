@@ -60,3 +60,16 @@ client.connect(err => {
                 }
             })
         })
+        // Add a Review
+        app.post('/addreview', async (req, res) => {
+            let { title, review, email, productid, photo, rating, name } = req.body
+            let myobj = { title, review, email, productid, photo, rating, name }
+            db.collection("reviews").insertOne(myobj, (err, data) => {
+                if (!err) {
+                    res.send(data)
+                }
+                else {
+                    res.send(err)
+                }
+            })
+        })
