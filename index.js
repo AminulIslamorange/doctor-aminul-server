@@ -16,3 +16,34 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 app.get('/', (req, res) => {
     res.send("its working")
 })
+client.connect(err => {
+    if (err) {
+        console.log(err);
+        return;
+    }
+    else {
+        const db = client.db("test");
+
+        // Routes
+        app.get('/users', async (req, res) => {
+            const users = await db.collection("users").find().toArray()
+            res.json({ status: "success", data: users })
+        })
+    
+        // // get 3 services for Home
+        app.get('/services/home', async (req, res) => {
+            let services = await (await db.collection("services").find().toArray())
+             
+            res.json({ status: "success", data: services.slice(-3).reverse() })
+        })
+        // get all services
+        app.get('/services', async (req, res) => {
+            const services = await (await db.collection("services").find().toArray()).reverse()
+            res.json({ status: "success", data: services })
+        })
+        // / get one service
+        app.get('/service/:id', async (req, res) => {
+            let { id } = req.params
+            const service = await (db.collection("services").findOne(ObjectId(id)))
+            res.json({ status: "success", data: service })
+        })
