@@ -47,3 +47,16 @@ client.connect(err => {
             const service = await (db.collection("services").findOne(ObjectId(id)))
             res.json({ status: "success", data: service })
         })
+          // Add a service
+          app.post('/addservice', async (req, res) => {
+            let { title, shortdescription, longdescription, price, rating, bannerimage, mainimage } = req.body
+            let myobj = { title, shortdescription, longdescription, price, rating, bannerimage, mainimage }
+            db.collection("services").insertOne(myobj, (err, result) => {
+                if (!err) {
+                    res.send(result)
+                }
+                else {
+                    res.send(err)
+                }
+            })
+        })
