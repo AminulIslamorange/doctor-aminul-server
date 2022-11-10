@@ -1,7 +1,6 @@
 {
   "name": "dr-aminul-backend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -18,5 +17,14 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.11.0",
     "nodemon": "^2.0.20"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-AminulIslamorange.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-AminulIslamorange/issues"
+  },
+  "homepage": "https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-AminulIslamorange#readme",
+  "description": ""
 }
