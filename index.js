@@ -73,3 +73,15 @@ client.connect(err => {
                 }
             })
         })
+         // get reviews by product id 
+         app.get('/reviews/:productid', async (req, res) => {
+            let { productid } = req.params
+            const reviews = await (db.collection("reviews").find({ productid: productid }).toArray())
+            res.json({ status: "success", data: reviews })
+        })
+        // get my reviews by  email 
+        app.get('/myreviews/:email', async (req, res) => {
+            let { email } = req.params
+            const reviews = await (db.collection("reviews").find({ email: email }).toArray())
+            res.json({ status: "success", data: reviews })
+        })
