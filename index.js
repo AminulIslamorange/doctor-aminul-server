@@ -85,3 +85,14 @@ client.connect(err => {
             const reviews = await (db.collection("reviews").find({ email: email }).toArray())
             res.json({ status: "success", data: reviews })
         })
+        
+// Delete a review from my reviews
+
+app.delete('/deletereview/:id', async (req, res) => {
+    const id = req.params.id;
+    console.log(id);
+    const query = { _id: ObjectId(id) };
+    const result = await (db.collection("reviews").deleteOne(query));
+    res.send(result);
+
+})
