@@ -114,3 +114,15 @@ app.delete('/deletereview/:id', async (req, res) => {
 
     }
 });
+app.listen(process.env.PORT || 5000, () => {
+    console.log('Server is Running');
+    client.connect(err => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log("Connected Server Successfully");
+        }
+
+    });
+})
