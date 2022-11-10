@@ -1,0 +1,8 @@
+const express = require("express")
+require('dotenv').config()
+const app = express()
+const cors = require('cors')
+app.use(cors())
+const jwt = require("jsonwebtoken")
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
