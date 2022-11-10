@@ -96,3 +96,21 @@ app.delete('/deletereview/:id', async (req, res) => {
     res.send(result);
 
 })
+
+        // Login
+        app.post("/login", async (req, res) => {
+            console.log('hitting path /login');
+            const { email, password } = req.body;       
+           let user = {email , password}
+            delete user.password
+            const token = jwt.sign(user, process.env.JWT_SECRET)
+            res.json({
+                status: true,
+                data: user,
+                token
+
+            })
+        })
+
+    }
+});
