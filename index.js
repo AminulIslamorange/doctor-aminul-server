@@ -2,6 +2,7 @@ const express = require("express")
 require('dotenv').config()
 const app = express()
 const cors = require('cors')
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const auth = require("./auth")
 app.use(cors())
 const jwt = require("jsonwebtoken")
@@ -9,20 +10,21 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.jc6tmol.mongodb.net/?retryWrites=true&w=majority`
+
+// const uri = `mongodb+srv://aminul123:AYeUqxxtDxel1j8X@cluster0.jc6tmol.mongodb.net/?retryWrites=true&w=majority`
+var uri = "mongodb://aminul123:AYeUqxxtDxel1j8X@ac-bgahv6g-shard-00-00.mpfz1at.mongodb.net:27017,ac-bgahv6g-shard-00-01.mpfz1at.mongodb.net:27017,ac-bgahv6g-shard-00-02.mpfz1at.mongodb.net:27017/?ssl=true&replicaSet=atlas-jhqpc4-shard-0&authSource=admin&retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 
 app.get('/', (req, res) => {
     res.send("its working")
 })
-client.connect(err => {
-    if (err) {
-        console.log(err);
-        return;
-    }
-    else {
+// client.connect(err => {
+//     if (err) {
+//         console.log(err);
+//         return;
+//     }
+//     else {
         const db = client.db("test");
 
         // Routes
@@ -113,9 +115,9 @@ app.delete('/deletereview/:id', async (req, res) => {
             })
         })
 
-    }
-});
-app.listen(process.env.PORT || 5000, () => {
+    // }
+// });
+app.listen(process.env.PORT || 5001, () => {
     console.log('Server is Running');
     client.connect(err => {
         if (err) {
