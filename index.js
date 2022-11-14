@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }))
 
 
 // const uri = `mongodb+srv://aminul123:AYeUqxxtDxel1j8X@cluster0.jc6tmol.mongodb.net/?retryWrites=true&w=majority`
-var uri = "mongodb://aminul123:AYeUqxxtDxel1j8X@ac-bgahv6g-shard-00-00.mpfz1at.mongodb.net:27017,ac-bgahv6g-shard-00-01.mpfz1at.mongodb.net:27017,ac-bgahv6g-shard-00-02.mpfz1at.mongodb.net:27017/?ssl=true&replicaSet=atlas-jhqpc4-shard-0&authSource=admin&retryWrites=true&w=majority";
+var uri = `mongodb://${process.env.DB_USER}:${process.env.PASSWORD}@ac-bgahv6g-shard-00-00.mpfz1at.mongodb.net:27017,ac-bgahv6g-shard-00-01.mpfz1at.mongodb.net:27017,ac-bgahv6g-shard-00-02.mpfz1at.mongodb.net:27017/?ssl=true&replicaSet=atlas-jhqpc4-shard-0&authSource=admin&retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 
@@ -117,7 +117,7 @@ app.delete('/deletereview/:id', async (req, res) => {
 
     // }
 // });
-app.listen(process.env.PORT || 5001, () => {
+app.listen(process.env.PORT || 5002, () => {
     console.log('Server is Running');
     client.connect(err => {
         if (err) {
